@@ -1,34 +1,20 @@
+"use strict";
+
+// 모듈
 const express = require('express');
-const res = require('express/lib/response');
 const app = express();
 
-app.get("/", (req, res) => {
-    // 기능
-    res.send("여기는 루트입니다");
-});
+// 라우팅
+const home = require("./routes/home");
 
-app.get("/login", (req, res) => {
-    res.send(`<!DOCTYPE html>
-    <html lang="ko">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-      </head>
-      <body>
-        <input type="text" placeholder="아이디"/><br />
-        <input type="pwd" placeholder="비밀번호"/><br />
-        <button>로그인</button>
-      </body>
-    </html>
-    `);
-});
+// 앱 세팅
+app.set("views", "./views");
+app.set("view engine", "ejs");
 
-app.listen(3000, () => {
-    console.log("서버 가동");
-});
+app.use("/", home); // use -> 미들 웨어를 등록해주는 메서드
 
+
+module.exports = app;
 
 
 
